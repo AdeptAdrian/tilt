@@ -28,7 +28,7 @@ export async function getPlayerByUsername(
 }
 
 export async function upsertPlayer(
-  player: Omit<Player, 'id' | 'created_at'> & { user_id?: string }
+  player: Omit<Player, 'id' | 'created_at' | 'cached_at'> & { user_id?: string }
 ): Promise<Player> {
   const supabase = createSupabaseServiceClient()
   try {

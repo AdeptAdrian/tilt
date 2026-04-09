@@ -42,9 +42,9 @@ export async function POST(req: NextRequest) {
     if (error) throw error
 
     // Deduplicate
-    const uniqueTeammateIds = [
-      ...new Set((teammateRows ?? []).map((r: { player_id: string }) => r.player_id)),
-    ].slice(0, MAX_ENRICHMENTS_PER_RUN)
+    const uniqueTeammateIds = Array.from(
+      new Set((teammateRows ?? []).map((r: { player_id: string }) => r.player_id))
+    ).slice(0, MAX_ENRICHMENTS_PER_RUN)
 
     if (uniqueTeammateIds.length === 0) {
       return NextResponse.json({ enriched: 0 })
